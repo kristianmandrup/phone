@@ -293,7 +293,7 @@
   :national_dialing_prefix: "0"
   :char_2_code: "0"
   :char_3_code: "VE"
-  :name: Venezuela, Bolivarian Republic of
+  :name: "Venezuela, Bolivarian Republic of"
   :international_dialing_prefix: "00"
 "256": 
   :country_code: "256"
@@ -941,7 +941,7 @@
   :national_dialing_prefix: None
   :char_2_code: None
   :char_3_code: "TW"
-  :name: Taiwan, Province Of China
+  :name: "Taiwan, Province Of China"
   :international_dialing_prefix: "002"
 "378": 
   :country_code: "378"
@@ -1154,7 +1154,7 @@
   :national_dialing_prefix: "1"
   :char_2_code: "1"
   :char_3_code: "FM"
-  :name: Micronesia, Federated States Of
+  :name: "Micronesia, Federated States Of"
   :international_dialing_prefix: "011"
 "297": 
   :country_code: "297"
@@ -1407,6 +1407,14 @@
   :char_3_code: "TN"
   :name: Tunisia
   :international_dialing_prefix: "00"
+"46": 
+  :country_code: "46"
+  :national_dialing_prefix: "0"
+  :char_2_code: "0"
+  :char_3_code: SE
+  :name: Sweden
+  :international_dialing_prefix: "0"
+  :area_code: "900|1[013689]|2[0136]|3[1356]|4[0246]|54|6[03]|7[01236]|8|9[09]|1[2457]\\d|2[2457-9]\\d|3[0247-9]\\d|4[1357-9]\\d|5[0-35-9]\\d|6[124-9]\\d|74\\d|9[1-8]\\d"
 "386": 
   :country_code: "386"
   :national_dialing_prefix: "0"
@@ -1495,7 +1503,7 @@
   :national_dialing_prefix: "0"
   :char_2_code: "0"
   :char_3_code: "MK"
-  :name: Macedonia, the Former Yugoslav Republic Of
+  :name: "Macedonia, the Former Yugoslav Republic Of"
   :international_dialing_prefix: "00"
 "670": 
   :country_code: "670"

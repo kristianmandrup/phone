@@ -11,6 +11,7 @@
 #
 require File.join(File.dirname(__FILE__), 'support') unless defined? ActiveSupport
 require File.join(File.dirname(__FILE__), 'country')
+require File.join(File.dirname(__FILE__), 'errors')
 
 module Phoner
   class Phone
@@ -47,13 +48,13 @@ module Phoner
       self.country = hash_or_args[ keys[:country] ]
 
       # Santity checks
-      raise "Must enter number" if self.number.blank?
-      raise "Must enter area code or set default area code" if self.area_code.blank?
-      raise "Must enter country code or set default country code" if self.country_code.blank?
+      raise NumberError, "Must enter number" if self.number.blank?
+      raise AreaCodeError, "Must enter area code or set default area code" if self.area_code.blank?
+      raise CountryCodeError, "Must enter country code or set default country code" if self.country_code.blank?
     end
 
     def self.parse!(string, options={})
-        parse(string, options.merge(:raise_exception_on_error => true))
+      parse(string, options.merge(:raise_exception_on_error => true))
     end
 
     # create a new phone number by parsing a string
@@ -71,6 +72,7 @@ module Phoner
 
       parts = split_to_parts(normalized, options)
 
+      puts "parts: #{parts.inspect} - #{normalized} - #{options}"
       pn = Phone.new(parts) if parts
       if pn.present? and extension.present?
         pn.extension = extension
@@ -93,9 +95,15 @@ module Phoner
     # split string into hash with keys :country_code, :area_code and :number
     def self.split_to_parts(string, options = {})
       country = Country.detect(string, options[:country_code], options[:area_code])
-
+      puts "country: #{country} - #{options[:country_code]} - #{options[:area_code]}" 
       if country.nil?
-        raise "Could not determine country" if options[:raise_exception_on_error]
+        if options[:raise_exception_on_error] # || defined?(PhoneTest)
+          if options[:country_code].nil?
+            raise CountryCodeError, "Must enter country code or set default country code"
+          else
+            raise CountryCodeError, "Could not find country with country code #{options[:country_code]}"
+          end
+        end
         return nil
       end
 

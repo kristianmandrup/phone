@@ -9,7 +9,7 @@ class PhoneTest < Phoner::TestCase
   def test_number_without_country_code_initialize
     Phoner::Phone.default_country_code = nil
 
-    assert_raise RuntimeError do
+    assert_raise Phoner::CountryCodeError do
       pn = Phoner::Phone.new '5125486', '91'
     end
   end
@@ -18,7 +18,7 @@ class PhoneTest < Phoner::TestCase
     Phoner::Phone.default_country_code = nil
     Phoner::Phone.default_area_code = nil
 
-    assert_raise RuntimeError do
+    assert_raise Phoner::AreaCodeError do
       pn = Phoner::Phone.new '451588'
     end
   end
@@ -59,20 +59,17 @@ class PhoneTest < Phoner::TestCase
   def test_parse_short_without_special_characters_without_country
     Phoner::Phone.default_country_code = nil
 
-    assert_nil Phoner::Phone.parse "0915125486"
 
-    assert_raise RuntimeError do
-      Phoner::Phone.parse! "0915125486"
+    assert_raise Phoner::CountryCodeError do
+      pn = Phoner::Phone.parse "0915125486", :raise_exception_on_error => true
     end
   end
 
   def test_parse_short_with_special_characters_without_country
     Phoner::Phone.default_country_code = nil
 
-    assert_nil Phoner::Phone.parse "091/512-5486"
-
-    assert_raise RuntimeError do
-      Phoner::Phone.parse! "091/512-5486"
+    assert_raise Phoner::CountryCodeError do
+      pn = Phoner::Phone.parse "091/512-5486", :raise_exception_on_error => true
     end
   end
 
